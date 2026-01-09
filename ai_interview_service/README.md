@@ -4,20 +4,28 @@ An AI-powered interview preparation platform that helps users practice and impro
 
 ---
 
+## Set Environment Variables
+
+```bash
+OPENAI_API_KEY=your_api_key_here
+```
+
 ## ▶️ Run the Application
 
 ```bash
-cd ai_interview_frontend
-npm install
-npm start
+cd ai_interview_service
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+fastapi dev main.py
 ```
 
 ## 🌐 Access the Application
 
-Frontend (React UI):
+FastAPI Swagger Docs:
 
 ```bash
-👉 http://localhost:3000/
+👉 http://localhost:8000/docs
 ```
 
 ## 🤙 Connect Community
