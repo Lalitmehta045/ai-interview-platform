@@ -123,7 +123,7 @@ const InterviewPage = () => {
 
     return <>
 
-        {loading && <div class="loader"></div>}
+        {loading && <div className="loader"></div>}
 
         { status === APP_CONSTANT.IDLE && <StartInterview onClick={startInterview}/> }
 

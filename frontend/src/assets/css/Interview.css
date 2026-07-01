@@ -106,3 +106,47 @@ h2 {
   margin-bottom: 1rem;
   color: #333;
 }
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .interview-container {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    padding: 30px 5%;
+    gap: 30px;
+    justify-content: flex-start;
+  }
+
+  .interview-column {
+    width: 100%;
+    height: auto;
+    flex: none;
+  }
+
+  .bot-section,
+  .candidate-section {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    padding: 30px 20px;
+  }
+
+  .gif-placeholder,
+  .gif-placeholder-gray {
+    width: 150px;
+    height: 150px;
+  }
+
+  .controls-section {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .control-btn {
+    width: 100%;
+    max-width: 250px;
+  }
+}

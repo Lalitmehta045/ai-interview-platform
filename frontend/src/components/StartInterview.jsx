@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../assets/css/StartInterview.css"
 import { generateQuestionsAPI, startInterviewAPI } from "../services/interview";
 
@@ -12,6 +12,27 @@ const StartInterview = ({onClick}) => {
     const [resume, setResume] = useState(null);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const [voices, setVoices] = useState([]);
+    const [selectedVoiceURI, setSelectedVoiceURI] = useState(localStorage.getItem("ai_voice_uri") || "");
+
+    useEffect(() => {
+        const loadVoices = () => {
+            const availableVoices = window.speechSynthesis.getVoices();
+            setVoices(availableVoices);
+            if (availableVoices.length > 0 && !localStorage.getItem("ai_voice_uri")) {
+                setSelectedVoiceURI(availableVoices[0].voiceURI);
+            }
+        };
+
+        loadVoices();
+        window.speechSynthesis.onvoiceschanged = loadVoices;
+    }, []);
+
+    const handleVoiceChange = (e) => {
+        const uri = e.target.value;
+        setSelectedVoiceURI(uri);
+        localStorage.setItem("ai_voice_uri", uri);
+    };
 
     const handleFileUpload = (e) => {
         try {
@@ -115,6 +136,21 @@ const StartInterview = ({onClick}) => {
                     required
                     onChange={handleFileUpload}
                 />
+            </div>
+
+            <div className="form-group">
+                <label>AI Voice</label>
+                <select 
+                    value={selectedVoiceURI} 
+                    onChange={handleVoiceChange}
+                    style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ccc', marginTop: '5px' }}
+                >
+                    {voices.map(voice => (
+                        <option key={voice.voiceURI} value={voice.voiceURI}>
+                            {voice.name} ({voice.lang})
+                        </option>
+                    ))}
+                </select>
             </div>
 
             <button type="submit" className="submit-btn" disabled={loading}>

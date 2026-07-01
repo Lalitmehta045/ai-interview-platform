@@ -11,6 +11,15 @@ export const playAudio = (text, onEnd) => {
   utterance.volume = 1;
   utterance.pitch = 1;
 
+  const storedVoiceURI = localStorage.getItem("ai_voice_uri");
+  if (storedVoiceURI) {
+    const voices = window.speechSynthesis.getVoices();
+    const selectedVoice = voices.find(v => v.voiceURI === storedVoiceURI);
+    if (selectedVoice) {
+      utterance.voice = selectedVoice;
+    }
+  }
+
   utterance.onend = () => {
     onEnd?.();
   };
