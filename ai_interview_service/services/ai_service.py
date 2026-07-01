@@ -1,9 +1,15 @@
-from openai import OpenAI
+import os
+import google.generativeai as genai
 from dotenv import load_dotenv
 import json
 
 load_dotenv()
-client = OpenAI()
+genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+
+model = genai.GenerativeModel(
+    "gemini-2.5-flash",
+    generation_config={"response_mime_type": "application/json"}
+)
 
 async def generate_questions_intro(job_title, job_description, resume_text):
     SYSTEM_PROMPT = f"""
@@ -50,14 +56,9 @@ async def generate_questions_intro(job_title, job_description, resume_text):
             candidate_name: LoopKaka
     """
 
-    response = client.chat.completions.create(
-        model="gpt-4.1-mini",
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT}
-        ]
-    )
+    response = model.generate_content(SYSTEM_PROMPT)
 
-    return json.loads(response.choices[0].message.content)
+    return json.loads(response.text)
 
 
 async def generate_report(answers = []):
@@ -88,11 +89,6 @@ async def generate_report(answers = []):
          - If candidate didn't answer anything then mark score 0%, correct_answer 0 and improvment_area as it is provide.
     """
 
-    response = client.chat.completions.create(
-        model="gpt-4.1-mini",
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT}
-        ]
-    )
+    response = model.generate_content(SYSTEM_PROMPT)
 
-    return json.loads(response.choices[0].message.content)
+    return json.loads(response.text)

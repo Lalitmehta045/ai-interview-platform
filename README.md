@@ -10,7 +10,7 @@ This project is built using the following technologies:
 
 - **Backend:** FastAPI (Python)
 - **Frontend:** ReactJS
-- **AI Engine:** OpenAI
+- **AI Engine:** Gemini
 - **Containerization:** Docker & Docker Compose
 
 ---
@@ -45,7 +45,7 @@ Before running the application, make sure you have the following installed:
 ## Set Environment Variables
 
 ```bash
-OPENAI_API_KEY=your_api_key_here
+GEMINI_API_KEY=your_api_key_here
 ```
 
 ## ▶️ Run the Application

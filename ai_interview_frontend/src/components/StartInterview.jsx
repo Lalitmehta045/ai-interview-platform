@@ -61,6 +61,11 @@ const StartInterview = ({onClick}) => {
             // generate question endpoint
             const response = await generateQuestionsAPI(formData);
 
+            if (!response) {
+                setError("Failed to generate questions. Please check the server.");
+                return;
+            }
+
             // Start interview endpoint
             const data = await startInterviewAPI(response.session_id);
 

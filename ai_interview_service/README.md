@@ -7,7 +7,7 @@ An AI-powered interview preparation platform that helps users practice and impro
 ## Set Environment Variables
 
 ```bash
-OPENAI_API_KEY=your_api_key_here
+GEMINI_API_KEY=your_api_key_here
 ```
 
 ## ▶️ Run the Application
