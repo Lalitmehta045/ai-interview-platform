@@ -31,6 +31,8 @@ const InterviewPage = () => {
         }
         const data = await submitAPI(payload);
 
+        if(!data) return;
+
         if(data.interviewEnded) {
             // Report generate
             finshInterview();
@@ -79,6 +81,8 @@ const InterviewPage = () => {
         }
         const data = await submitAPI(payload);
 
+        if(!data) return;
+
         if(data.interviewEnded) {
             // Report generate
             finshInterview();
@@ -97,6 +101,7 @@ const InterviewPage = () => {
                 startListening();
             })
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [status, question]);
 
     const startInterview = async (data, session_id) => {
