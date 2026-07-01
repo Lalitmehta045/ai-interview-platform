@@ -16,16 +16,31 @@ const StartInterview = ({onClick}) => {
     const [selectedVoiceURI, setSelectedVoiceURI] = useState(localStorage.getItem("ai_voice_uri") || "");
 
     useEffect(() => {
+        let intervalId;
         const loadVoices = () => {
             const availableVoices = window.speechSynthesis.getVoices();
-            setVoices(availableVoices);
-            if (availableVoices.length > 0 && !localStorage.getItem("ai_voice_uri")) {
-                setSelectedVoiceURI(availableVoices[0].voiceURI);
+            if (availableVoices.length > 0) {
+                setVoices(availableVoices);
+                if (!localStorage.getItem("ai_voice_uri")) {
+                    setSelectedVoiceURI(availableVoices[0].voiceURI);
+                }
+                clearInterval(intervalId);
             }
         };
 
         loadVoices();
-        window.speechSynthesis.onvoiceschanged = loadVoices;
+        
+        if (typeof window.speechSynthesis !== 'undefined' && window.speechSynthesis.onvoiceschanged !== undefined) {
+            window.speechSynthesis.onvoiceschanged = loadVoices;
+        }
+
+        // Polling fallback for mobile browsers (Safari/Chrome) where onvoiceschanged may be unreliable
+        intervalId = setInterval(loadVoices, 500);
+
+        // Stop polling after 5 seconds to prevent infinite loop if no voices exist
+        setTimeout(() => clearInterval(intervalId), 5000);
+
+        return () => clearInterval(intervalId);
     }, []);
 
     const handleVoiceChange = (e) => {
