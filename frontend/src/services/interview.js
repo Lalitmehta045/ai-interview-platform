@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_API_URL || "https://ai-interview-platform-e3qb.onrender.com";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8000";
 const BASE_URL = `${API_URL}/interview`;
 
 export const startInterviewAPI = async (sessionId) => {
