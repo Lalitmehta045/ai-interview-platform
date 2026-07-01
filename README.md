@@ -1,97 +1,66 @@
-# 🤖 AI Interview Platform
+# AI Interview Platform
 
-An AI-powered interview preparation platform that helps users practice and improve their interview skills through intelligent question generation, real-time interactions, and automated evaluation.
+A comprehensive, AI-powered interview preparation platform designed to help candidates practice and refine their interviewing skills. The platform leverages Generative AI to generate role-specific questions, conducts interactive real-time interview sessions, and provides detailed automated evaluation and feedback.
 
----
+## Key Features
 
-## 🚀 Tech Stack
+- **Personalized Questions**: Generates tailored interview questions based on the candidate's uploaded resume, job title, and job description.
+- **Real-Time Interactive AI**: Conducts the interview dynamically, asking one question at a time with integrated text-to-speech AI voices.
+- **Flexible Controls**: Allows candidates to naturally progress, skip questions, or end the interview early if needed.
+- **Detailed Evaluation**: Generates a comprehensive feedback report post-interview, detailing performance metrics, strengths, areas for improvement, and an overall summary.
 
-This project is built using the following technologies:
+## Tech Stack
 
 - **Backend:** FastAPI (Python)
 - **Frontend:** ReactJS
-- **AI Engine:** Gemini
-- **Containerization:** Docker & Docker Compose
+- **AI Engine:** Google Gemini
+- **Deployment:** Docker & Docker Compose
 
----
+## Prerequisites
 
-## 🧠 Features
+Before setting up the project locally, ensure you have the following installed:
+- Python 3.8+
+- Node.js (v14 or higher)
+- Docker & Docker Compose (optional, for containerized setup)
 
-- The user shall be able to enter a job title, job description, and upload a resume.
-- The user shall be able to start the interview after providing the required information.
-- The system shall analyze the resume, job title, and job description to generate personalized interview questions based on:
-  - Relevant skills
-  - Years of experience
-  - Job role requirements
-- The AI bot shall ask interview questions one at a time.
-- The user shall be able to answer a question or skip a question.
-- Once all questions have been asked or the user ends the interview manually, the system shall generate a detailed interview feedback report, including:
-  - Performance evaluation
-  - Strengths and improvement areas
-  - Overall interview summary
+## Getting Started
 
----
+### 1. Environment Configuration
 
-## 🐳 Prerequisites
-
-Before running the application, make sure you have the following installed:
-
-- Python 3+
-- NodeJS
-- Docker (Optional)
-
----
-
-## Set Environment Variables
-
-```bash
+You will need a Google Gemini API key to power the AI. Create a `.env` file in the root of the `backend` directory with the following:
+```env
 GEMINI_API_KEY=your_api_key_here
 ```
 
-## ▶️ Run the Application
+### 2. Running via Docker (Recommended)
 
-To start the application using docker, run the following command from the project root directory:
-
+To launch the complete application stack (frontend and backend) using Docker Compose, run the following from the project root:
 ```bash
 docker compose up -d
 ```
 
-**OR** To start the application manually
+### 3. Running Manually
 
-- Start Backend
+If you prefer to run the services manually without Docker:
 
+**Start the Backend:**
 ```bash
-cd ai_interview_service
-python3 -m venv venv
-source venv/bin/activate
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
 pip install -r requirements.txt
 fastapi dev main.py
 ```
 
-- Start Frontend
-
+**Start the Frontend:**
 ```bash
-cd ai_interview_frontend
+cd frontend
 npm install
 npm start
 ```
 
-## 🌐 Access the Application
+## Accessing the Application
 
-FastAPI Swagger Docs:
-
-```bash
-👉 http://localhost:8000/docs
-```
-
-Frontend (React UI):
-
-```bash
-👉 http://localhost:3000/
-```
-
-## 🤙 Connect Community
-
-💬 Join the LoopKaka Discord Community!
-Got questions, doubts, or want to discuss topics from my videos?
-Join our friendly Discord server to connect, learn, and grow together 👉 [https://discord.gg/BZwkqTsbND](https://discord.gg/BZwkqTsbND)
+Once the services are running, you can access them via your browser:
+- **Frontend UI:** [http://localhost:3000](http://localhost:3000)
+- **Backend API (Swagger Docs):** [http://localhost:8000/docs](http://localhost:8000/docs)
